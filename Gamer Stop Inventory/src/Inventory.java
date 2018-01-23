@@ -12,7 +12,11 @@ public class Inventory {
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Hello, welcome to the OXiam Dictionary."); //intro
+		JFrame frame=new JFrame("Gamer Stop Inventory");
+		frame.setSize(300, 300);
+		frame.setLayout(null);
+		frame.setVisible(true);//intro
+		title= new JLabel("Are you a customer or an Employee?");
 		
 		start(); //this way, if the user wants to continue looking for words they wont get the 'hello' thing again
 		
