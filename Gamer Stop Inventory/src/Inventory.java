@@ -12,15 +12,50 @@ public class Inventory {
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		JFrame frame=new JFrame("Gamer Stop Inventory");
-		frame.setSize(300, 300);
+		JFrame frame=new JFrame("Gamer Stop Inventory"); //UI start 
+		frame.setSize(1000, 500);
 		frame.setLayout(null);
-		frame.setVisible(true);//intro
-		title= new JLabel("Are you a customer or an Employee?");
+		frame.setVisible(true);
 		
+		JLabel title= new JLabel("Are you a customer or an Employee?");
+		title.setBounds(333,75,666,75);
+		
+		JButton e=new JButton("Employee");
+		JButton c=new JButton("Customer");
+		
+		e.setBounds(225,200,100,50);
+		c.setBounds(550,200,100,50);
+		
+		frame.add(title);
+		frame.add(e);
+		frame.add(c);
+		
+		c.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try {
+					start();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			}
+		});
+		
+		c.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					//customer();
+				} catch (IOException e1){
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			}
+		});
 		start(); //this way, if the user wants to continue looking for words they wont get the 'hello' thing again
 		
 	}
+	
 	
 	public static void start() throws IOException{
 		System.out.println("Enter a word or search for one,\nType \'Search\' or \'s\' to Search"

@@ -28,6 +28,7 @@ public class swing_practice extends JFrame {
         setSize(300, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
     }
 
     private void createLayout(JComponent... arg) {
