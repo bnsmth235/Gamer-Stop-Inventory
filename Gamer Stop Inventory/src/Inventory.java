@@ -28,7 +28,7 @@ public class Inventory {
 			Srch_NW.equals("Search")|| //several different options for user type
 			Srch_NW.equals("search")){
 			
-			System.out.println("Search for word:");
+			System.out.println("Search for Title:");
 			srch_in=in.next();
 			FileReader(srch_in);
 			
@@ -39,7 +39,7 @@ public class Inventory {
 				Srch_NW.equals("New word")||
 				Srch_NW.equals("new word")){
 			
-			System.out.println("Enter new word: ");
+			System.out.println("Enter new title: ");
 			String nw=in.nextLine();
 			word_def_check(nw);
 			
