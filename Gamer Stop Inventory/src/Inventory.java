@@ -14,50 +14,70 @@ public class Inventory {
 		// TODO Auto-generated method stub
 		JFrame frame=new JFrame("Gamer Stop Inventory"); //UI start 
 		frame.setSize(1000, 500);
-		frame.setLayout(null);
+		frame.setLayout(null);	
 		frame.setVisible(true);
 		
 		JLabel title= new JLabel("Are you a customer or an Employee?");
-		title.setBounds(333,75,666,75);
+		title.setBounds(333,25,666,75);
 		
-		JButton e=new JButton("Employee");
+		JButton e=new JButton("Employee");	//two different buttons
 		JButton c=new JButton("Customer");
 		
-		e.setBounds(225,200,100,50);
-		c.setBounds(550,200,100,50);
+		e.setBounds(225,125,100,50); //where each button is positioned
+		c.setBounds(550,125,100,50);
 		
 		frame.add(title);
-		frame.add(e);
+		frame.add(e); //adding each of the components to the frame
 		frame.add(c);
 		
-		c.addActionListener(new ActionListener(){
+		c.addActionListener(new ActionListener(){ //if you press the customer button...
 			public void actionPerformed(ActionEvent e){
 				try {
-					start();
+					start(); //goes to the start method
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				System.exit(0);
 			}
 		});
 		
-		c.addActionListener(new ActionListener(){
+		e.addActionListener(new ActionListener(){ //if you press the employee button
 			public void actionPerformed(ActionEvent e){
-				try{
-					//customer();
-				} catch (IOException e1){
-					e1.printStackTrace();
-				}
-				System.exit(0);
+				
+				final JPasswordField value = new JPasswordField(); // 
+			    value.setBounds(100,75,100,30);   
+			    
+			    JLabel l1=new JLabel("Username:");    
+			    l1.setBounds(20,20, 80,30);   
+			    
+			    JLabel l2=new JLabel("Password:");    
+			    l2.setBounds(20,75, 80,30);    
+			    
+			    JButton b = new JButton("Login");  
+			    b.setBounds(100,120, 80,30);    
+			    
+			    final JTextField text = new JTextField();  
+			    text.setBounds(100,20, 100,30);
+			    
+			    frame.add(value); frame.add(l1); frame.add(l2); frame.add(b); frame.add(text);  
+			    
+			    b.addActionListener(new ActionListener() {  
+			    	public void actionPerformed(ActionEvent e) {  
+			    		
+			    		String data = "Username " + text.getText();  
+			    		data += ", Password: "+ new String(value.getPassword());          
+			    	}  
+			    });   
 			}
 		});
-		start(); //this way, if the user wants to continue looking for words they wont get the 'hello' thing again
 		
 	}
 	
 	
 	public static void start() throws IOException{
+		JFrame c_frame=new JFrame("Customer Inventory Search");
+		c_frame.setSize(1000, 500);
+		c_frame.setVisible(true);
 		System.out.println("Enter a word or search for one,\nType \'Search\' or \'s\' to Search"
 				+ " or type \'New Title\' or \'nt\' to enter a Title and information.");
 		
