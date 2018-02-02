@@ -14,17 +14,17 @@ public class Inventory {
 		// TODO Auto-generated method stub
 		JFrame frame=new JFrame("Gamer Stop Inventory"); //UI start 
 		frame.setSize(1000, 500);
-		frame.setLayout(null);	
+		frame.setLayout(null);
 		frame.setVisible(true);
 		
 		JLabel title= new JLabel("Are you a customer or an Employee?");
-		title.setBounds(333,25,666,75);
+		title.setBounds(400,25,666,75);
 		
 		JButton e=new JButton("Employee");	//two different buttons
 		JButton c=new JButton("Customer");
 		
-		e.setBounds(225,125,100,50); //where each button is positioned
-		c.setBounds(550,125,100,50);
+		e.setBounds(200,150,100,50); //where each button is positioned
+		c.setBounds(700,150,100,50);
 		
 		frame.add(title);
 		frame.add(e); //adding each of the components to the frame
@@ -207,4 +207,3 @@ public class Inventory {
 	
 
 }
-
