@@ -1,3 +1,14 @@
+/*
+ * Simple UI for documenting an inventory for a fake
+ * game store that can be used as an employee or just a customer
+ * stores the name, price, system etc
+ * 
+ * @author Ben and Adam Smith
+ * @version 1.0
+ * @Since January 19, 2018
+ * 
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -26,13 +37,12 @@ public class Inventory {
 		e.setBounds(225,125,100,50); //where each button is positioned
 		c.setBounds(550,125,100,50);
 		
-		frame.add(title);
-		frame.add(e); //adding each of the components to the frame
-		frame.add(c);
+		frame.add(title); frame.add(e); frame.add(c);//adding each of the components to the frame
 		
 		c.addActionListener(new ActionListener(){ //if you press the customer button...
 			public void actionPerformed(ActionEvent e){
 				try {
+					title.setVisible(false);
 					start(); //goes to the start method
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -44,22 +54,32 @@ public class Inventory {
 		e.addActionListener(new ActionListener(){ //if you press the employee button
 			public void actionPerformed(ActionEvent e){
 				
-				final JPasswordField value = new JPasswordField(); // 
+				frame.setVisible(false);//gets rid of old window
+				
+				JFrame login_frame = new JFrame("Employee Login");
+				login_frame.setSize(300, 300);
+				login_frame.setLayout(null); //new window setup
+			    login_frame.setVisible(true);
+				
+				final JPasswordField value = new JPasswordField(); //Password field text entry
 			    value.setBounds(100,75,100,30);   
 			    
+			    final JTextField user = new JTextField();  
+			    user.setBounds(100,20, 100,30); //username entry
+			    
 			    JLabel l1=new JLabel("Username:");    
-			    l1.setBounds(20,20, 80,30);   
+			    l1.setBounds(20,20, 80,30);   //just username title
 			    
 			    JLabel l2=new JLabel("Password:");    
-			    l2.setBounds(20,75, 80,30);    
+			    l2.setBounds(20,75, 80,30);    //password title
 			    
 			    JButton b = new JButton("Login");  
-			    b.setBounds(100,120, 80,30);    
+			    b.setBounds(100,120, 80,30);   //login button 
 			    
-			    final JTextField text = new JTextField();  
-			    text.setBounds(100,20, 100,30);
 			    
-			    frame.add(value); frame.add(l1); frame.add(l2); frame.add(b); frame.add(text);  
+			    
+			    login_frame.add(value); login_frame.add(l1); login_frame.add(l2); login_frame.add(b); login_frame.add(user); //add all components to frame
+			    
 			    
 			    b.addActionListener(new ActionListener() {  
 			    	public void actionPerformed(ActionEvent e) {  
@@ -78,6 +98,9 @@ public class Inventory {
 		JFrame c_frame=new JFrame("Customer Inventory Search");
 		c_frame.setSize(1000, 500);
 		c_frame.setVisible(true);
+		
+		JLabel c_start=new JLabel("Search for a Title by Name or Console");
+		c_start.setBounds(333,25,666,75);
 		System.out.println("Enter a word or search for one,\nType \'Search\' or \'s\' to Search"
 				+ " or type \'New Title\' or \'nt\' to enter a Title and information.");
 		
