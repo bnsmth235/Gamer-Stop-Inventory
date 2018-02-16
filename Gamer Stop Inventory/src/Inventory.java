@@ -26,7 +26,7 @@ public class inventory {
 		// TODO Auto-generated method stub
 		JFrame frame=new JFrame("Gamer Stop Inventory"); //UI start 
 		frame.setSize(1000, 500);
-		frame.setLayout(null);
+		frame.setLayout(null);	
 		frame.setVisible(true);
 		
 		JLabel title= new JLabel("Are you a customer or an Employee?");
@@ -232,3 +232,4 @@ public class inventory {
 	
 
 }
+
