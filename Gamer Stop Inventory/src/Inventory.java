@@ -42,7 +42,7 @@ public class Inventory {
 		
 		c.addActionListener(new ActionListener(){ //if you press the customer button...
 			public void actionPerformed(ActionEvent e){
-				title.setVisible(false);
+				frame.setVisible(false);
 				try {
 					start();
 				} catch (IOException e1) {
@@ -76,34 +76,32 @@ public class Inventory {
 			    l2.setBounds(20,75, 80,30);    //password title
 			    
 			    JButton b = new JButton("Login");  
-			    b.setBounds(100,120, 80,30);   //login button 
+			    b.setBounds(100,120, 90,30);   //login button 
 			    
 			    JButton r=new JButton("Register");
-			    r.setBounds(100, 140, 80, 30);
+			    r.setBounds(100, 160, 90, 30);
 			    
 			    
 			    
-			    login_frame.add(pass); login_frame.add(l1); login_frame.add(l2); login_frame.add(b); login_frame.add(user); //add all components to frame
+			    login_frame.add(pass); login_frame.add(l1); login_frame.add(l2); login_frame.add(b); login_frame.add(user); login_frame.add(r);//add all components to frame
 			    
 			    
 			    b.addActionListener(new ActionListener() {  
 			    	public void actionPerformed(ActionEvent e) {  
-			    		String username = user.getText();  
+			    		String username = user.getText();  //gets input from the frame and saves into variables
 			    		String password = pass.getText();
 
 			    		try {
-							if(FileReader(username, password)==true){
+							if(FileReader_user_pass(username, password)==true){ //if the inputted username and password are in the saved list
 								System.out.println("Welcome"+username);
-								JLabel welcome=new JLabel("Welcome "+username);
+								JLabel welcome=new JLabel("Welcome "+username); //says welcome [username]
 								welcome.setBounds(100, 200, 80, 30);
 								login_frame.add(welcome);
-								System.out.println("Frame should be added");
 							}else{
-								System.out.println("return false try again");
 							}
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							e1.printStackTrace();//idk why this is here, but it doesnt work without it
 						}
 			    	}  
 			    });  
@@ -125,43 +123,42 @@ public class Inventory {
 		c_frame.setLayout(null);
 		c_frame.setVisible(true);
 		
-		JLabel c_start=new JLabel("Search for a Title by Name or Console");
+		JLabel c_start=new JLabel("Search for a Title by Name or Console");//title at top of frame
 		c_start.setBounds(333,25,666,75);
 		
+		String[] console={"Select Console","PS4","XBox One", "Switch"}; //list of consoles
+		JComboBox consoles=new JComboBox(console);
+		consoles.setBounds(250, 120, 125, 30);
 		
-		c_frame.add(c_start);
+		JLabel title_label=new JLabel("Game Title:");//title
+		title_label.setBounds(410, 120, 100, 30);
 		
-		System.out.println("Enter a word or search for one,\nType \'Search\' or \'s\' to Search"
-				+ " or type \'New Title\' or \'nt\' to enter a Title and information.");
+		JTextField title=new JTextField(); //search entry
+		title.setBounds(480, 120, 250, 30);
 		
-		String Srch_NW=in.next();//change to swing GUI eventually...
-		if(Srch_NW.equals("s")||
-			Srch_NW.equals("S")||
-			Srch_NW.equals("Search")|| //several different options for user type
-			Srch_NW.equals("search")){
-			
-			System.out.println("Search for Title:");
-			srch_in=in.next();
-			//FileReader(srch_in);
-			
-			
-		}else if(Srch_NW.equals("nw")||
-				Srch_NW.equals("NW")||
-				Srch_NW.equals("New Word")||//here also
-				Srch_NW.equals("New word")||
-				Srch_NW.equals("new word")){
-			
-			System.out.println("Enter new title: ");
-			String nw=in.nextLine();
-			word_def_check(nw);
-			
-		}else{
-			start();
-		}
+		JButton search=new JButton("Search");
+		search.setBounds(400, 180, 80, 30); //enter button basically
+		
+		c_frame.add(c_start); c_frame.add(consoles); c_frame.add(title_label); c_frame.add(title); c_frame.add(search); //add all components to the frame
+		
+		search.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent a){
+				String game_title=title.getText(); //puts searched title into the variable
+				
+			}
+		});
+		consoles.addActionListener(new ActionListener() {  
+	        public void actionPerformed(ActionEvent b) {       
+	        	Object data=consoles.getItemAt(consoles.getSelectedIndex());  //gets which console they chose and saves it into an object
+	        }  
+		});           
+		
+		
+		
 	}
 	
 	public static void FileWriter(String word_and_def) throws IOException{
-		FileWriter fw=new FileWriter("C:\\Users\\bs034696\\Documents\\GitHub\\Gamer-Stop-Inventory\\Gamer Stop Inventory\\src\\User_pass.txt.txt", true);
+		FileWriter fw=new FileWriter("C:\\Users\\bs034696\\Documents\\GitHub\\Gamer-Stop-Inventory\\Gamer Stop Inventory\\src\\User_pass.txt.txt", true); //writes new registered employees
 		PrintWriter pw=new PrintWriter(fw, true);
 		pw.println(word_and_def); //File Writing Method so I don't have to type this every time
 		pw.close();
@@ -169,21 +166,33 @@ public class Inventory {
 		
 	}
 	
-	public static boolean FileReader(String user, String pass) throws IOException{
-		System.out.println("file reader active");
-		Scanner scan=new Scanner(new File("C:\\Users\\bs034696\\Documents\\GitHub\\Gamer-Stop-Inventory\\Gamer Stop Inventory\\src\\User_pass.txt.txt"));
+	public static boolean FileReader_user_pass(String user, String pass) throws IOException{
+		Scanner scan=new Scanner(new File("C:\\Users\\bs034696\\Documents\\GitHub\\Gamer-Stop-Inventory\\Gamer Stop Inventory\\src\\User_pass.txt.txt")); //reads username and password lists
 		while(scan.hasNextLine()){
 			final String find_line=scan.nextLine();
 			if(find_line.toLowerCase().contains(user.toLowerCase())){//checks if the word (lower case) is in any words or 
 				if(find_line.toLowerCase().contains(pass.toLowerCase())){
 					scan.close();
-					System.out.println("return true");
 					return true;
 				}
 			}
 		}
 		scan.close();
-		System.out.println("return false");
+		return false;
+	}
+	
+	public static boolean FileReader_game_titles(String title, String console) throws IOException{ //reads list of game titles
+		Scanner scan=new Scanner(new File("C:\\Users\\bs034696\\Documents\\GitHub\\Gamer-Stop-Inventory\\Gamer Stop Inventory\\src\\Game_titles.txt"));
+		while(scan.hasNextLine()){
+			final String find_line=scan.nextLine();
+			if(find_line.toLowerCase().contains(title.toLowerCase())){//checks if the word (lower case) is in any words or 
+				if(find_line.toLowerCase().contains(console.toLowerCase())){
+					scan.close();
+					return true;
+				}
+			}
+		}
+		scan.close();
 		return false;
 	}
 	
